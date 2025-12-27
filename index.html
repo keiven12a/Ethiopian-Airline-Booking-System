@@ -18,22 +18,22 @@
         <!-- Main Menu -->
         <div id="main-menu" class="screen active">
             <div class="airline-logo">
-                <div class="airline-logo-icon">AE</div>
-                <div>
-                    <div class="airline-logo-text">ETHIOPIAN AIRLINES</div>
-                    <div class="airline-tagline">THE NEW EXPERIENCE</div>
-                </div>
-            </div>
+       <div class="airline-logo-icon">AE</div>
+        <div>
+            <div class="airline-logo-text" data-i18n="airline_name">ETHIOPIAN AIRLINES</div>
+            <div class="airline-tagline" data-i18n="airline_tagline">THE NEW EXPERIENCE</div>
+          </div>
+        </div>
 
             <div class="main-menu-welcome">
                 <h1 data-i18n="main_title">Airline Booking Systems</h1>
                 <p data-i18n="main_subtitle">welcome to Airline Booking System</p>
                  <!-- About System Button -->
-        <div class="about-system-btn-container">
-            <button class="btn btn-info" onclick="showAboutSystem()">
-                 About Airline Booking System
-            </button>
-        </div><br><br>
+       <div class="about-system-btn-container">
+    <button class="btn btn-info" onclick="showAboutSystem()" data-i18n="about_system">
+         About Airline Booking System
+    </button>
+</div><br><br>
                  <!-- Registration/Login Prompt - No box, just text -->
         <div class="login-prompt-text">
             <p>If you are registered before, <br>login here 👇</p>
@@ -73,45 +73,45 @@
 <div id="about-system-modal" class="modal">
     <div class="modal-content about-modal-content">
         <div class="about-modal-header">
-            <h2>About Ethiopian Airlines Booking System</h2>
+            <h2 data-i18n="about_title">About Ethiopian Airlines Booking System</h2>
             <button class="btn-close" onclick="closeAboutModal()">&times;</button>
         </div>
         <div class="about-modal-body">
             <div class="about-section">
-                <h3> System Features</h3>
+                <h3 data-i18n="about_features"> System Features</h3>
                 <ul>
-                    <li><strong>Easy Registration:</strong> Quick passenger registration with secure data storage</li>
-                    <li><strong>Flight Booking:</strong> Browse and book available flights with real-time seat availability</li>
-                    <li><strong>Seat Selection:</strong> Interactive seat map for choosing preferred seats</li>
-                    <li><strong>Secure Payment:</strong> Safe payment processing for flight bookings</li>
-                    <li><strong>Booking Management:</strong> View and manage your flight bookings</li>
-                    <li><strong>Flight Search:</strong> Search flights by destination and departure city</li>
+                    <li data-i18n="feature_registration">Easy Registration: Quick passenger registration with secure data storage</li>
+                    <li data-i18n="feature_booking">Flight Booking: Browse and book available flights with real-time seat availability</li>
+                    <li data-i18n="feature_seats">Seat Selection: Interactive seat map for choosing preferred seats</li>
+                    <li data-i18n="feature_payment">Secure Payment: Safe payment processing for flight bookings</li>
+                    <li data-i18n="feature_management">Booking Management: View and manage your flight bookings</li>
+                    <li data-i18n="feature_search">Flight Search: Search flights by destination and departure city</li>
                 </ul>
             </div>
             
             <div class="about-section">
-                <h3> User Types</h3>
+                <h3 data-i18n="about_user_types"> User Types</h3>
                 <div class="user-types">
                     <div class="user-type-card">
-                        <h4>Passengers</h4>
-                        <p>• Register and create account</p>
-                        <p>• Book flights and select seats</p>
-                        <p>• View booking history</p>
-                        <p>• Search available flights</p>
+                        <h4 data-i18n="user_passengers">Passengers</h4>
+                        <p data-i18n="user_passenger1">• Register and create account</p>
+                        <p data-i18n="user_passenger2">• Book flights and select seats</p>
+                        <p data-i18n="user_passenger3">• View booking history</p>
+                        <p data-i18n="user_passenger4">• Search available flights</p>
                     </div>
                     <div class="user-type-card">
-                        <h4>Administrators</h4>
-                        <p>• Add new flights to the system</p>
-                        <p>• Manage flight seat availability</p>
-                        <p>• View all bookings</p>
-                        <p>• Access system statistics</p>
+                        <h4 data-i18n="user_admins">Administrators</h4>
+                        <p data-i18n="user_admin1">• Add new flights to the system</p>
+                        <p data-i18n="user_admin2">• Manage flight seat availability</p>
+                        <p data-i18n="user_admin3">• View all bookings</p>
+                        <p data-i18n="user_admin4">• Access system statistics</p>
                     </div>
                 </div>
             </div>
             
             <div class="about-section">
-                <h3>Flight Information</h3>
-                <p>Our system includes flights to major Ethiopian destinations:</p>
+                <h3 data-i18n="about_flight_info">Flight Information</h3>
+                <p data-i18n="flight_info_text">Our system includes flights to major Ethiopian destinations:</p>
                 <div class="destinations">
                     <span class="destination-tag">Addis Ababa (ADD)</span>
                     <span class="destination-tag">Bahir Dar (BJR)</span>
@@ -125,29 +125,29 @@
             </div>
             
             <div class="about-section">
-                <h3> Security & Privacy</h3>
-                <p>• All passenger data is securely stored locally</p>
-                <p>• Passwords are protected</p>
-                <p>• Secure payment processing</p>
-                <p>• Data privacy compliance</p>
+                <h3 data-i18n="about_security"> Security & Privacy</h3>
+                <p data-i18n="security1">• All passenger data is securely stored locally</p>
+                <p data-i18n="security2">• Passwords are protected</p>
+                <p data-i18n="security3">• Secure payment processing</p>
+                <p data-i18n="security4">• Data privacy compliance</p>
             </div>
             
             <div class="about-section">
-                <h3> Multi-language Support</h3>
-                <p>The system supports both English and Amharic languages. Use the language switcher in the top-right corner to change languages.</p>
+                <h3 data-i18n="about_multilanguage"> Multi-language Support</h3>
+                <p data-i18n="multilanguage_text">The system supports both English and Amharic languages. Use the language switcher in the top-right corner to change languages.</p>
             </div>
             
             <div class="about-section">
-                <h3>ℹ️ Getting Started</h3>
-                <p>1. <strong>New Users:</strong> Click "Passenger Registration" to create an account</p>
-                <p>2. <strong>Returning Users:</strong> Click "Passenger Login" to access your account</p>
-                <p>3. <strong>Admin Access:</strong> Use "Admin Login" for system management</p>
-                <p>4. <strong>Quick Login:</strong> Use the "Existing Users" section for quick access</p>
+                <h3 data-i18n="about_getting_started"> Getting Started</h3>
+                <p data-i18n="start1">1.New Users: Click "Passenger Registration" to create an account</p>
+                <p data-i18n="start2">2.Returning Users: Click "Passenger Login" to access your account</p>
+                <p data-i18n="start3">3.Admin Access: Use "Admin Login" for system management</p>
+                <p data-i18n="start4">4.Quick Login: Use the "Existing Users" section for quick access</p>
             </div>
         </div>
         <div class="about-modal-footer">
             <p class="system-version">System Version: 2.0 | Last Updated: December 2024</p>
-            <button class="btn btn-primary" onclick="closeAboutModal()">Close</button>
+            <button class="btn btn-primary" onclick="closeAboutModal()" data-i18n="close_button">Close</button>
         </div>
     </div>
 </div>
@@ -174,40 +174,40 @@
                        <input type="text" id="passenger-username" data-i18n-placeholder="username" required="" placeholder="Username">
                    </div>
                 <div class="form-group">
-                    <label for="passenger-gender" data-i18n="gender">Gender</label>
-                    <select id="passenger-gender" required="">
-                        <option value="" disabled selected>Choose your gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
+                   <label for="passenger-gender" data-i18n="gender">Gender</label>
+                   <select id="passenger-gender" required="">
+                       <option value="" disabled selected data-i18n="choose_gender">Choose your gender</option>
+                       <option value="Male" data-i18n="gender_male">Male</option>
+                       <option value="Female" data-i18n="gender_female">Female</option>
+                       <option value="Other" data-i18n="gender_other">Other</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="passenger-age" data-i18n="age">Age</label>
                     <input type="number" id="passenger-age" data-i18n-placeholder="age" required="" placeholder="Enter your age" min="0" max="120">
-                    <div class="input-announcement">
-                <strong>Age-Based Policies:</strong><br>
-                • Under 2: Infants (may travel free/lap infant)<br>
-                • 2-4: Travel Alone is Not permitted under any circumstances.<br>
-                • 5-11: Permitted to travel alone using the Unaccompanied Minor (UM) service.<br>
-                • 12+: Considered adult for ticketing
-            </div>
+                <div class="input-announcement">
+                    <strong data-i18n="age_policies_title">Age-Based Policies:</strong><br>
+                    <span data-i18n="age_policy1">• Under 2: Infants (may travel free/lap infant)</span><br>
+                    <span data-i18n="age_policy2">• 2-4: Children (usually need paid seat)</span><br>
+                    <span data-i18n="age_policy3">• 5-11: Unaccompanied Minor service may be required</span><br>
+                    <span data-i18n="age_policy4">• 12+: Considered adult for ticketing</span>
+                </div>
                 </div>
                 <div class="form-group">
                     <label for="passenger-email" data-i18n="email">Email</label>
-                    <input type="email" id="passenger-email" data-i18n-placeholder="youremail@email.com"  placeholder="Email">
+                     <input type="email" id="passenger-email" data-i18n-placeholder="email_placeholder" placeholder="youremail@example.com">
                 </div>
                 <div class="form-group">
                     <label for="passenger-passport" data-i18n="passport_number">Passport Number</label>
                     <input type="text" id="passenger-passport" data-i18n-placeholder="passport_number" required="" placeholder="Passport Number">
-                    <div class="input-announcement">Enter 13-19 digit passport number</div>
+                    <div class="input-announcement" data-i18n="passport_announcement">Enter 13-19 digit passport number</div>
                 </div>
                 <div class="form-group">
                     <label for="passenger-password" data-i18n="password">Password</label>
                     <input type="password" id="passenger-password" data-i18n-placeholder="password" required="" placeholder="Password">
                 </div>
                    <div class="form-group">
-                    <div class="input-announcement">Minimum 8 characters required</div>
+                    <div class="input-announcement" data-i18n="password_announcement">Minimum 8 characters required</div>
                        <label for="passenger-confirm-password" data-i18n="confirm_password">Confirm Password</label>
                        <input type="password" id="passenger-confirm-password" data-i18n-placeholder="confirm_password" required="">
                    </div>
@@ -415,7 +415,59 @@
 
         <!-- modals removed from here and placed after container to avoid clipping -->
     </div>
-
+    <!-- Payment Method Selection Modal -->
+<div id="payment-method-modal" class="modal">
+    <div class="modal-content payment-modal-content">
+        <div class="payment-modal-header">
+            <h3 data-i18n="select_payment_method">Select Payment Method</h3>
+        </div>
+        <div class="payment-modal-amount">
+            <p data-i18n="payment_for">Payment for: <span id="method-flight-info"></span></p>
+            <p data-i18n="amount">Amount: $<span id="method-payment-amount">0</span></p>
+        </div>
+        <div class="payment-methods-container">
+            <div class="payment-method-card" onclick="selectPaymentMethod('visa')">
+                <div class="payment-method-icon">💳</div>
+                <div class="payment-method-info">
+                    <h4>Visa / MasterCard</h4>
+                    <p>Credit or Debit Card</p>
+                </div>
+                <div class="payment-method-select">✓</div>
+            </div>
+            
+            <div class="payment-method-card" onclick="selectPaymentMethod('paypal')">
+                <div class="payment-method-icon">🔵</div>
+                <div class="payment-method-info">
+                    <h4>PayPal</h4>
+                    <p>Pay with PayPal account</p>
+                </div>
+                <div class="payment-method-select">✓</div>
+            </div>
+            
+            <div class="payment-method-card" onclick="selectPaymentMethod('bank')">
+                <div class="payment-method-icon">🏦</div>
+                <div class="payment-method-info">
+                    <h4>Bank Transfer</h4>
+                    <p>Direct bank transfer</p>
+                </div>
+                <div class="payment-method-select">✓</div>
+            </div>
+            
+            <div class="payment-method-card" onclick="selectPaymentMethod('mobile')">
+                <div class="payment-method-icon">📱</div>
+                <div class="payment-method-info">
+                    <h4>Mobile Money</h4>
+                    <p>M-Pesa, CBE Birr, etc.</p>
+                </div>
+                <div class="payment-method-select">✓</div>
+            </div>
+        </div>
+        <div class="payment-modal-actions">
+            <button class="btn btn-success" onclick="proceedToPayment()" data-i18n="continue_to_pay">Continue to Payment</button>
+            <button class="btn btn-back" onclick="closePaymentMethodModal()" data-i18n="cancel">Cancel</button>
+        </div>
+    </div>
+</div>
     <!-- Payment Modal (moved outside .container to ensure overlay visibility) -->
     <!-- Seat Selection Modal (choose seat before payment) -->
     <div id="seat-modal" class="modal" aria-hidden="true">
@@ -464,6 +516,7 @@
         </div>
     </div>
 
+
     <div id="payment-modal" class="modal">
         <div class="payment-modal-content">
             <div class="payment-modal-header">
@@ -476,17 +529,17 @@
                 <div class="form-group">
                     <label for="card-number" data-i18n="card_number">Card Number</label>
                     <input type="text" id="card-number" data-i18n-placeholder="card_number" maxlength="19" placeholder="Card Number">
-                    <small style="color: #666; font-size: 12px;">Enter 13-19 digit card number</small>
+                    <small style="color: #666; font-size: 12px;" data-i18n="card_number_help">Enter 13-19 digit card number</small>
                 </div>
                 <div class="form-group">
                     <label for="card-cvv" data-i18n="cvv">CVV</label>
                     <input type="text" id="card-cvv" data-i18n-placeholder="cvv" maxlength="4" placeholder="CVV">
-                    <small style="color: #666; font-size: 12px;">Enter 3 or 4 digit CVV</small>
+                    <small style="color: #666; font-size: 12px;" data-i18n="cvv_help">Enter 3 or 4 digit CVV</small>
                 </div>
                 <div class="form-group">
                     <label for="card-expiry" data-i18n="expiry_date">MM/YY</label>
                     <input type="text" id="card-expiry" data-i18n-placeholder="expiry_date" maxlength="5" placeholder="MM/YY">
-                    <small style="color: #666; font-size: 12px;">Format: MM/YY (e.g., 12/25)</small>
+                    <small style="color: #666; font-size: 12px;" data-i18n="expiry_help">Format: MM/YY (e.g., 12/25)</small>
                 </div>
                 <div class="payment-modal-actions">
                     <button class="btn btn-success" onclick="processPayment()" data-i18n="pay_now">Pay Now</button>
@@ -512,7 +565,145 @@
             <div id="manage-seats-message" class="message"></div>
         </div>
     </div>
+<!-- Edit Flight Modal -->
+<div id="edit-flight-modal" class="modal">
+    <button data-i18n="edit_flight">Edit Flight</button>
+    <div class="modal-content payment-modal-content">
+        <div class="payment-modal-header">
+            <h3>Edit Flight <span id="edit-flight-number"></span></h3>
+        </div>
+        <div class="payment-modal-form">
+            <form id="edit-flight-form" onsubmit="updateFlight(event)">
+                <input type="hidden" id="edit-flight-original-number">
+                
+                <div class="form-group">
+                    <label for="edit-flight-number-input">Flight Number</label>
+                    <input type="text" id="edit-flight-number-input" required placeholder="Flight Number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-flight-source">From</label>
+                    <input type="text" id="edit-flight-source" required placeholder="Departure City">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-flight-destination">To</label>
+                    <input type="text" id="edit-flight-destination" required placeholder="Destination City">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-flight-time">Departure Time (HH:MM)</label>
+                    <input type="text" id="edit-flight-time" required placeholder="08:00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-flight-seats">Seats Available</label>
+                    <input type="number" id="edit-flight-seats" min="0" required placeholder="Seats Available">
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-flight-price">Price ($)</label>
+                    <input type="number" id="edit-flight-price" min="0" step="0.01" required placeholder="Price">
+                </div>
+                
+                <div class="payment-modal-actions">
+                    <button type="submit" class="btn btn-success">Update Flight</button>
+                    <button type="button" class="btn btn-back" onclick="closeEditFlightModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <div id="edit-flight-message" class="message"></div>
+    </div>
+</div>
 
+<!-- Delete Confirmation Modal -->
+<div id="delete-confirmation-modal" class="modal">
+    <button data-i18n="delete_flight">Delete Flight</button>
+    <div class="modal-content">
+        <h3>Confirm Delete</h3>
+        <p>Are you sure you want to delete flight <span id="delete-flight-number"></span>?</p>
+        <p class="warning-text">This action cannot be undone!</p>
+        <div class="modal-actions">
+            <button class="btn btn-danger" onclick="deleteFlight()">Yes, Delete</button>
+            <button class="btn btn-back" onclick="closeDeleteConfirmationModal()">Cancel</button>
+        </div>
+        <div id="delete-message" class="message"></div>
+    </div>
+</div>
+<!-- Cancel Booking Modal -->
+<div id="cancel-booking-modal" class="modal">
+    <div class="modal-content">
+        <h3 data-i18n="cancel_booking_title">Cancel Booking</h3>
+        <p data-i18n="cancel_booking_text">Are you sure you want to cancel this booking?</p>
+        <div class="refund-info">
+            <p data-i18n="refund_policy">Refund Policy:</p>
+            <ul>
+                <li data-i18n="refund_1">• Cancellation within 24 hours: 90% refund</li>
+                <li data-i18n="refund_2">• Cancellation within 48 hours: 75% refund</li>
+                <li data-i18n="refund_3">• Cancellation after 48 hours: 50% refund</li>
+            </ul>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-danger" onclick="confirmCancelBooking()" data-i18n="confirm_cancel">Yes, Cancel Booking</button>
+            <button class="btn btn-back" onclick="closeCancelModal()" data-i18n="keep_booking">No, Keep Booking</button>
+        </div>
+        <div id="cancel-message" class="message"></div>
+    </div>
+</div>
+
+<!-- Delay Booking Modal -->
+<div id="delay-booking-modal" class="modal">
+    <div class="modal-content payment-modal-content">
+        <div class="payment-modal-header">
+            <h3 data-i18n="delay_booking_title">Delay Your Booking</h3>
+        </div>
+        <div class="payment-modal-form">
+            <div class="form-group">
+                <label data-i18n="select_new_flight">Select New Flight:</label>
+                <select id="new-flight-select" onchange="updateDelayPrice()">
+                    <option value="" data-i18n="choose_flight">Choose a flight</option>
+                    <!-- Options will be added by JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label data-i18n="delay_reason">Reason for Delay (Optional):</label>
+                <select id="delay-reason">
+                    <option value="" data-i18n="choose_reason">Choose a reason</option>
+                    <option value="personal" data-i18n="reason_personal">Personal reasons</option>
+                    <option value="emergency" data-i18n="reason_emergency">Emergency</option>
+                    <option value="schedule" data-i18n="reason_schedule">Schedule conflict</option>
+                    <option value="other" data-i18n="reason_other">Other</option>
+                </select>
+            </div>
+            
+            <div class="price-comparison">
+                <div class="price-item">
+                    <span data-i18n="original_price">Original Price:</span>
+                    <span id="original-price">$0</span>
+                </div>
+                <div class="price-item">
+                    <span data-i18n="new_price">New Price:</span>
+                    <span id="new-price">$0</span>
+                </div>
+                <div class="price-item total">
+                    <span data-i18n="price_difference">Price Difference:</span>
+                    <span id="price-difference">$0</span>
+                </div>
+            </div>
+            
+            <div class="delay-fee-note">
+                <p data-i18n="delay_fee_note">Note: A $25 rebooking fee applies for flight changes.</p>
+            </div>
+            
+            <div class="payment-modal-actions">
+                <button class="btn btn-success" onclick="confirmDelayBooking()" data-i18n="confirm_delay">Confirm Delay</button>
+                <button class="btn btn-back" onclick="closeDelayModal()" data-i18n="cancel_delay">Cancel</button>
+            </div>
+        </div>
+        <div id="delay-message" class="message"></div>
+    </div>
+</div>
     <!-- Airline Footer -->
     <div class="airline-footer">
         <div class="airline-contact">

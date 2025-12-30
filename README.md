@@ -18,7 +18,8 @@ featuring bilingual support and comprehensive management tools for both passenge
              - Payment Processing
              - Multi-language Support (English & Amharic)
 
- User Roles
+
+ User Roles
       Passenger Features
                -  User registration with passport details
               -  Browse available flights
@@ -40,10 +41,7 @@ featuring bilingual support and comprehensive management tools for both passenge
 Quick Start
            Default Admin Credentials
                -Username: RESPECT_WORLD
-              -Password: keiven12a
-           default passenger credential
-             - username: kb   
-             - password: 12345
+              -Password: keiven12
 
          Pre-loaded Ethiopian Flight Routes
              -The system comes with 10 pre-configured domestic Ethiopian flight routes:
@@ -58,7 +56,8 @@ Quick Start
              9. Addis Ababa → Gambella (ET709)
              10. Addis Ababa → Jimma (ET710)
 
-Technical Details
+
+Technical Details
          File Structure
           airline-booking-system/
                                                │
@@ -176,11 +175,13 @@ Troubleshooting
                  2. Login issues: Verify correct credentials
                  3. Display problems: Ensure browser supports modern CSS features
                 4. Language not switching: Refresh page after language change
-Browser Requirements
+
+Browser Requirements
               - JavaScript must be enabled
              - LocalStorage support required
              - Modern CSS support recommended
-Future Enhancements
+
+Future Enhancements
          Potential features for future versions:
              - Email notifications
             - Advanced payment integration
@@ -200,5 +201,6 @@ Troubleshooting
 
 License
        This project is for educational and demonstration purposes.
+
 
 Note: This is a client-side application. For production use, consider implementing server-side validation and a proper database system.

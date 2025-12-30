@@ -910,6 +910,7 @@ function completeBooking(paymentMethod) {
         showMessage('passenger-login-message', 'Flight booked successfully!', 'success');
     }, 2000);
 }
+// Update the initializeData function to properly set dayOfWeek
 function initializeData() {
     if (admins.length === 0) {
         admins.push({ username: "RESPECT_WORLD", password: "keiven12a" });
@@ -917,94 +918,147 @@ function initializeData() {
     }
 
     if (flights.length === 0) {
-        flights = [
-            {
-                flightNumber: "ET701",
-                source: "Addis Ababa (ADD)",
-                destination: "Bahir Dar (BJR)",
-                departureTime: "08:00",
-                seatsAvailable: 120,
-                price: 85
-            },
-            {
-                flightNumber: "ET702",
-                source: "Addis Ababa (ADD)",
-                destination: "Mekele (MQX)",
-                departureTime: "09:30",
-                seatsAvailable: 150,
-                price: 110
-            },
-            {
-                flightNumber: "ET703",
-                source: "Addis Ababa (ADD)",
-                destination: "Gondar (GDQ)",
-                departureTime: "10:15",
-                seatsAvailable: 100,
-                price: 95
-            },
-            {
-                flightNumber: "ET704",
-                source: "Addis Ababa (ADD)",
-                destination: "Hawassa (AWA)",
-                departureTime: "11:45",
-                seatsAvailable: 80,
-                price: 65
-            },
-            {
-                flightNumber: "ET705",
-                source: "Addis Ababa (ADD)",
-                destination: "Arba Minch (AMH)",
-                departureTime: "13:20",
-                seatsAvailable: 90,
-                price: 75
-            },
-            {
-                flightNumber: "ET706",
-                source: "Addis Ababa (ADD)",
-                destination: "Dire Dawa (DIR)",
-                departureTime: "14:30",
-                seatsAvailable: 110,
-                price: 70
-            },
-            {
-                flightNumber: "ET707",
-                source: "Addis Ababa (ADD)",
-                destination: "Axum (AXU)",
-                departureTime: "15:45",
-                seatsAvailable: 70,
-                price: 105
-            },
-            {
-                flightNumber: "ET708",
-                source: "Addis Ababa (ADD)",
-                destination: "Lalibela (LLI)",
-                departureTime: "16:30",
-                seatsAvailable: 60,
-                price: 120
-            },
-            {
-                flightNumber: "ET709",
-                source: "Addis Ababa (ADD)",
-                destination: "Gambella (GMB)",
-                departureTime: "17:15",
-                seatsAvailable: 50,
-                price: 90
-            },
-            {
-                flightNumber: "ET710",
-                source: "Addis Ababa (ADD)",
-                destination: "Jimma (JIM)",
-                departureTime: "18:00",
-                seatsAvailable: 95,
-                price: 60
-            }
+        // Create flights for each day of the week
+        const routes = [
+            { source: "Addis Ababa (ADD)", destination: "Bahir Dar (BJR)", basePrice: 85 },
+            { source: "Addis Ababa (ADD)", destination: "Mekele (MQX)", basePrice: 110 },
+            { source: "Addis Ababa (ADD)", destination: "Gondar (GDQ)", basePrice: 95 },
+            { source: "Addis Ababa (ADD)", destination: "Hawassa (AWA)", basePrice: 65 },
+            { source: "Addis Ababa (ADD)", destination: "Dire Dawa (DIR)", basePrice: 70 },
+            { source: "Addis Ababa (ADD)", destination: "Axum (AXU)", basePrice: 105 },
+            { source: "Addis Ababa (ADD)", destination: "Lalibela (LLI)", basePrice: 120 }
         ];
+        
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const dayCodes = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+        const timeSlots = ['08:00', '10:00', '12:00', '14:00', '16:00'];
+        
+        flights = [];
+        
+        routes.forEach((route, routeIndex) => {
+            days.forEach((day, dayIndex) => {
+                // Add 1-2 flights per day for each route
+                const flightCount = Math.floor(Math.random() * 2) + 1; // 1 or 2 flights
+                
+                for (let i = 0; i < flightCount; i++) {
+                    const flightNumber = `ET${dayCodes[dayIndex]}${routeIndex + 1}${i + 1}`;
+                    const timeIndex = i % timeSlots.length;
+                    const departureTime = timeSlots[timeIndex];
+                    
+                    // Add some price variation based on day
+                    let price = route.basePrice;
+                    if (day === 'Friday' || day === 'Saturday' || day === 'Sunday') {
+                        price = Math.round(price * 1.2); // 20% higher on weekends
+                    } else if (day === 'Wednesday' || day === 'Thursday') {
+                        price = Math.round(price * 1.1); // 10% higher on midweek
+                    }
+                    
+                    flights.push({
+                        flightNumber: flightNumber,
+                        source: route.source,
+                        destination: route.destination,
+                        departureTime: departureTime,
+                        seatsAvailable: 120 + Math.floor(Math.random() * 30), // 120-150 seats
+                        price: price,
+                        dayOfWeek: day // Make sure this is set
+                    });
+                }
+            });
+        });
+        
         localStorage.setItem('flights', JSON.stringify(flights));
+    } else {
+        // If flights already exist, make sure they have dayOfWeek property
+        let needUpdate = false;
+        flights.forEach(flight => {
+            if (!flight.dayOfWeek) {
+                // Assign a random day if missing
+                const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                flight.dayOfWeek = days[Math.floor(Math.random() * days.length)];
+                needUpdate = true;
+            }
+        });
+        
+        if (needUpdate) {
+            localStorage.setItem('flights', JSON.stringify(flights));
+        }
     }
     
     loadExistingUsers();
+    
+    // Log flights for debugging
+    console.log('Available flights:');
+    flights.forEach(f => {
+        console.log(`${f.flightNumber}: ${f.source} → ${f.destination} (${f.dayOfWeek}, ${f.seatsAvailable} seats)`);
+    });
 }
-
+// Add this function to test delay functionality
+function testDelayFunction() {
+    console.log('=== TESTING DELAY FUNCTION ===');
+    
+    // Check if we have any bookings
+    if (bookings.length === 0) {
+        console.log('No bookings found. Create a booking first.');
+        return;
+    }
+    
+    // Use the first booking for testing
+    const testBooking = bookings[0];
+    console.log('Test booking:', {
+        id: testBooking.id,
+        passengerName: testBooking.passengerName,
+        flightNumber: testBooking.flightNumber,
+        source: testBooking.source,
+        destination: testBooking.destination
+    });
+    
+    // Find the original flight
+    const originalFlight = flights.find(f => f.flightNumber === testBooking.flightNumber);
+    console.log('Original flight:', originalFlight);
+    
+    // Check flights on different days for same route
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    
+    days.forEach(day => {
+        const availableFlights = flights.filter(f => 
+            f.source === testBooking.source && 
+            f.destination === testBooking.destination &&
+            f.dayOfWeek === day &&
+            f.seatsAvailable > 0 &&
+            f.flightNumber !== testBooking.flightNumber
+        );
+        
+        console.log(`${day}: ${availableFlights.length} flights`);
+        availableFlights.forEach(f => {
+            console.log(`  ${f.flightNumber} at ${f.departureTime} ($${f.price}, ${f.seatsAvailable} seats)`);
+        });
+    });
+    
+    // Test updateDelayPrice function directly
+    if (testBooking) {
+        bookingToDelay = testBooking.id;
+        console.log('\nCalling updateDelayPrice with Monday...');
+        
+        // Temporarily set day select
+        const daySelect = document.createElement('select');
+        daySelect.id = 'test-day-select';
+        daySelect.value = 'monday';
+        document.body.appendChild(daySelect);
+        
+        // Temporarily create other required elements
+        if (!document.getElementById('new-price')) {
+            const newPrice = document.createElement('span');
+            newPrice.id = 'new-price';
+            document.body.appendChild(newPrice);
+        }
+        
+        // Call the function
+        updateDelayPrice();
+        
+        // Clean up
+        document.body.removeChild(daySelect);
+    }
+}
 function loadExistingUsers() {
     const existingPassengers = document.getElementById('existing-passengers');
     const existingAdmins = document.getElementById('existing-admins');
@@ -1286,6 +1340,7 @@ function clearForms() {
 }
 
 // FIXED: Load flights for passenger
+// Update loadFlights() function to show day information:
 function loadFlights() {
     const flightsList = document.getElementById('flights-list');
     if (!flightsList) return;
@@ -1305,15 +1360,17 @@ function loadFlights() {
         flightCard.innerHTML = `
             <div class="flight-route">${flight.source} → ${flight.destination}</div>
             <div class="flight-details">
-                ${flight.flightNumber} | ${flight.departureTime} | 
-                Seats: ${flight.seatsAvailable} | $${flight.price}
+                <strong>Flight:</strong> ${flight.flightNumber}<br>
+                <strong>Day:</strong> ${flight.dayOfWeek || 'Daily'}<br>
+                <strong>Time:</strong> ${flight.departureTime}<br>
+                <strong>Seats:</strong> ${flight.seatsAvailable}<br>
+                <strong>Price:</strong> $${flight.price}
             </div>
             <button class="book-btn" data-flight-number="${flight.flightNumber}">Book Flight</button>
         `;
         flightsList.appendChild(flightCard);
     });
 }
-
 function searchFlights() {
     const from = document.getElementById('search-from').value.toLowerCase();
     const to = document.getElementById('search-to').value.toLowerCase();
@@ -1582,13 +1639,15 @@ function confirmCancelBooking() {
         loadStatistics(); // Update statistics
     }, 2000);
 }
-
 // ============ DELAY BOOKING FUNCTIONS ============
 
-// Show delay options modal
+let selectedDayForDelay = null;
+let assignedFlightForDelay = null;
+let delaySurchargeAmount = 0;
 
+// Show delay options modal
 function showDelayOptions(bookingId) {
-    console.log('Delay button clicked for booking:', bookingId); // For debugging
+    console.log('Delay button clicked for booking:', bookingId);
     
     const booking = bookings.find(b => b.id === bookingId);
     if (!booking) {
@@ -1598,39 +1657,29 @@ function showDelayOptions(bookingId) {
     
     bookingToDelay = bookingId;
     
-    // Populate flight options (excluding the current flight)
-    const flightSelect = document.getElementById('new-flight-select');
-    if (!flightSelect) {
-        console.error('new-flight-select element not found!');
+    // Reset all delay variables
+    selectedDayForDelay = null;
+    assignedFlightForDelay = null;
+    delaySurchargeAmount = 0;
+    
+    // Populate day options
+    const daySelect = document.getElementById('day-select');
+    if (!daySelect) {
+        console.error('day-select element not found!');
         return;
     }
     
-    flightSelect.innerHTML = '<option value="" data-i18n="choose_flight">Choose a flight</option>';
-    
-    const availableFlights = flights.filter(f => 
-        f.flightNumber !== booking.flightNumber && 
-        f.seatsAvailable > 0 &&
-        f.source === booking.source &&
-        f.destination === booking.destination
-    );
-    
-    if (availableFlights.length === 0) {
-        showMessage('delay-message', 'No alternative flights available for this route.', 'warning');
-        // Still show the modal but with a message
-    }
-    
-    availableFlights.forEach(flight => {
-        const option = document.createElement('option');
-        option.value = flight.flightNumber;
-        option.textContent = `${flight.flightNumber} | ${flight.departureTime} | $${flight.price}`;
-        option.dataset.price = flight.price;
-        flightSelect.appendChild(option);
-    });
+    // Clear previous selection
+    daySelect.value = '';
     
     // Set original price
     document.getElementById('original-price').textContent = `$${booking.price}`;
     document.getElementById('new-price').textContent = '$0';
+    document.getElementById('delay-surcharge').textContent = '$0';
     document.getElementById('price-difference').textContent = '$0';
+    
+    // Hide flight info initially
+    document.getElementById('delay-flight-info').style.display = 'none';
     
     // Reset the reason dropdown
     document.getElementById('delay-reason').value = '';
@@ -1651,67 +1700,432 @@ function showDelayOptions(bookingId) {
     }
 }
 
-// Update delay price when new flight is selected
-function updateDelayPrice() {
-    const flightSelect = document.getElementById('new-flight-select');
-    const selectedOption = flightSelect.options[flightSelect.selectedIndex];
-    
-    if (!selectedOption.value) {
-        document.getElementById('new-price').textContent = '$0';
-        document.getElementById('price-difference').textContent = '$0';
+// Updated updateDelayPrice function with better matching
+// Add this function to debug flight availability
+function debugFlightAvailability(bookingId) {
+    const booking = bookings.find(b => b.id === bookingId);
+    if (!booking) {
+        console.log('Booking not found');
         return;
     }
     
-    const newPrice = parseFloat(selectedOption.dataset.price);
-    const booking = bookings.find(b => b.id === bookingToDelay);
-    const originalPrice = booking.price;
+    console.log('=== DEBUG FLIGHT AVAILABILITY ===');
+    console.log('Booking details:', {
+        id: booking.id,
+        flightNumber: booking.flightNumber,
+        source: booking.source,
+        destination: booking.destination,
+        passenger: booking.passengerName
+    });
     
-    const REBOOKING_FEE = 25;
-    const priceDifference = (newPrice + REBOOKING_FEE) - originalPrice;
+    // Find the original flight
+    const originalFlight = flights.find(f => f.flightNumber === booking.flightNumber);
+    console.log('Original flight:', originalFlight);
     
-    document.getElementById('new-price').textContent = `$${newPrice}`;
-    document.getElementById('price-difference').textContent = `$${priceDifference.toFixed(2)}`;
+    // Show ALL flights for this route
+    console.log('\n=== ALL FLIGHTS FOR THIS ROUTE ===');
+    const routeFlights = flights.filter(f => 
+        f.source === booking.source && 
+        f.destination === booking.destination
+    );
     
-    // Color code the difference
-    const diffElement = document.getElementById('price-difference');
-    if (priceDifference > 0) {
-        diffElement.style.color = '#dc3545';
-    } else if (priceDifference < 0) {
-        diffElement.style.color = '#28a745';
+    if (routeFlights.length === 0) {
+        console.log('No flights found for this route!');
+        console.log('Available routes:', [...new Set(flights.map(f => `${f.source} → ${f.destination}`))]);
     } else {
-        diffElement.style.color = '#6c757d';
+        console.log(`Found ${routeFlights.length} flights for ${booking.source} → ${booking.destination}:`);
+        routeFlights.forEach(f => {
+            console.log(`  ${f.flightNumber}: ${f.dayOfWeek} at ${f.departureTime} (${f.seatsAvailable} seats, $${f.price})`);
+        });
+        
+        // Show flights available for delay (different flight number, has seats)
+        console.log('\n=== FLIGHTS AVAILABLE FOR DELAY ===');
+        const delayFlights = routeFlights.filter(f => 
+            f.flightNumber !== booking.flightNumber && 
+            f.seatsAvailable > 0
+        );
+        
+        if (delayFlights.length === 0) {
+            console.log('No flights available for delay!');
+            console.log('Reasons:');
+            routeFlights.forEach(f => {
+                if (f.flightNumber === booking.flightNumber) {
+                    console.log(`  ${f.flightNumber}: This is the original flight`);
+                } else if (f.seatsAvailable <= 0) {
+                    console.log(`  ${f.flightNumber}: No seats available (${f.seatsAvailable} seats)`);
+                }
+            });
+        } else {
+            console.log(`Found ${delayFlights.length} flights available for delay:`);
+            delayFlights.forEach(f => {
+                console.log(`  ${f.flightNumber}: ${f.dayOfWeek} at ${f.departureTime} (${f.seatsAvailable} seats)`);
+            });
+        }
     }
 }
 
-// Close delay modal
-function closeDelayModal() {
-    const delayModal = document.getElementById('delay-booking-modal');
-    if (delayModal) {
-        delayModal.style.display = 'none';
-    }
-    bookingToDelay = null;
-}
-
-// Confirm booking delay
-function confirmDelayBooking() {
-    if (!bookingToDelay) return;
+// Now let's fix the updateDelayPrice function to be more aggressive in finding alternatives
+function updateDelayPrice() {
+    console.log('=== UPDATE DELAY PRICE CALLED ===');
     
-    const flightSelect = document.getElementById('new-flight-select');
-    const newFlightNumber = flightSelect.value;
-    const delayReason = document.getElementById('delay-reason').value;
+    const daySelect = document.getElementById('day-select');
+    const selectedDay = daySelect.value;
     
-    if (!newFlightNumber) {
-        showMessage('delay-message', 'Please select a new flight!', 'error');
+    if (!selectedDay) {
+        console.log('No day selected');
+        resetDelayPriceUI();
         return;
     }
     
     const booking = bookings.find(b => b.id === bookingToDelay);
-    const newFlight = flights.find(f => f.flightNumber === newFlightNumber);
-    
-    if (!booking || !newFlight) {
-        showMessage('delay-message', 'Error processing delay request!', 'error');
+    if (!booking) {
+        console.error('Booking not found');
+        showMessage('delay-message', 'Error: Booking not found!', 'error');
         return;
     }
+    
+    // Debug the booking first
+    debugFlightAvailability(bookingToDelay);
+    
+    // Convert selected day to proper format
+    const dayName = selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1);
+    
+    console.log(`\nLooking for ${dayName} flights for delay...`);
+    
+    // STRATEGY 1: Find exact match for the selected day
+    let availableFlights = flights.filter(f => {
+        return f.source === booking.source &&
+               f.destination === booking.destination &&
+               f.dayOfWeek === dayName &&
+               f.seatsAvailable > 0 &&
+               f.flightNumber !== booking.flightNumber;
+    });
+    
+    console.log(`Strategy 1 (exact day match): Found ${availableFlights.length} flights`);
+    
+    // STRATEGY 2: If no exact match, find ANY flight on ANY day for same route
+    if (availableFlights.length === 0) {
+        console.log('Trying Strategy 2: Any flight on any day');
+        availableFlights = flights.filter(f => {
+            return f.source === booking.source &&
+                   f.destination === booking.destination &&
+                   f.seatsAvailable > 0 &&
+                   f.flightNumber !== booking.flightNumber;
+        });
+        console.log(`Strategy 2 (any day): Found ${availableFlights.length} flights`);
+    }
+    
+    // STRATEGY 3: If still no flights, try to find flights with similar routes
+    if (availableFlights.length === 0) {
+        console.log('Trying Strategy 3: Similar routes');
+        
+        // First, try flights from same departure to ANY destination
+        let similarFlights = flights.filter(f => {
+            return f.source === booking.source &&
+                   f.seatsAvailable > 0 &&
+                   f.flightNumber !== booking.flightNumber;
+        });
+        
+        // If we found some, show them
+        if (similarFlights.length > 0) {
+            console.log(`Found ${similarFlights.length} flights from same departure:`, 
+                similarFlights.map(f => `${f.destination} (${f.dayOfWeek})`));
+            
+            // Let the user choose from these
+            availableFlights = similarFlights.slice(0, 1); // Take first one for now
+            console.log('Will offer alternative destination:', availableFlights[0].destination);
+        }
+    }
+    
+    // If we found flights, proceed
+    if (availableFlights.length > 0) {
+        assignedFlightForDelay = availableFlights[0];
+        selectedDayForDelay = selectedDay;
+        
+        console.log('Selected flight for delay:', assignedFlightForDelay);
+        
+        // Calculate and display prices
+        calculateAndDisplayDelayPrices(booking, dayName);
+        
+        // Show appropriate message
+        if (assignedFlightForDelay.dayOfWeek === dayName) {
+            showMessage('delay-message', 
+                `✅ Found flight on ${dayName}: ${assignedFlightForDelay.flightNumber} at ${assignedFlightForDelay.departureTime}`, 
+                'success'
+            );
+        } else {
+            showMessage('delay-message', 
+                `⚠️ No ${dayName} flights. Offering ${assignedFlightForDelay.dayOfWeek} flight instead: ${assignedFlightForDelay.flightNumber}`, 
+                'warning'
+            );
+        }
+        
+    } else {
+        // Last resort: create a dummy flight for demonstration
+        console.log('No flights found. Creating demonstration flight...');
+        createDemoFlightForDelay(booking, dayName);
+    }
+}
+
+// Function to create a demo flight when no real flights are available
+function createDemoFlightForDelay(booking, dayName) {
+    // Create a dummy flight for demonstration
+    const demoFlightNumber = `ET-DLY-${Date.now().toString().slice(-4)}`;
+    
+    assignedFlightForDelay = {
+        flightNumber: demoFlightNumber,
+        source: booking.source,
+        destination: booking.destination,
+        departureTime: '14:00',
+        seatsAvailable: 10,
+        price: Math.round(booking.price * 1.2), // 20% higher
+        dayOfWeek: dayName,
+        isDemo: true
+    };
+    
+    selectedDayForDelay = dayName.toLowerCase();
+    
+    console.log('Created demo flight:', assignedFlightForDelay);
+    
+    // Calculate and display prices
+    calculateAndDisplayDelayPrices(booking, dayName);
+    
+    showMessage('delay-message', 
+        `⚠️ No real flights found. Created demonstration flight for ${dayName}.`, 
+        'warning'
+    );
+}
+
+// Also, let's add a function to generate more flights if needed
+function generateMoreFlightsForTesting() {
+    console.log('Generating additional flights for testing...');
+    
+    const routes = [
+        { source: "Addis Ababa (ADD)", destination: "Bahir Dar (BJR)", basePrice: 85 },
+        { source: "Addis Ababa (ADD)", destination: "Mekele (MQX)", basePrice: 110 },
+        { source: "Addis Ababa (ADD)", destination: "Gondar (GDQ)", basePrice: 95 },
+        { source: "Addis Ababa (ADD)", destination: "Hawassa (AWA)", basePrice: 65 },
+        { source: "Addis Ababa (ADD)", destination: "Dire Dawa (DIR)", basePrice: 70 },
+        { source: "Addis Ababa (ADD)", destination: "Axum (AXU)", basePrice: 105 },
+        { source: "Addis Ababa (ADD)", destination: "Lalibela (LLI)", basePrice: 120 }
+    ];
+    
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const timeSlots = ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'];
+    
+    let newFlightsCount = 0;
+    
+    routes.forEach(route => {
+        days.forEach(day => {
+            // Add 2-3 flights per day for each route
+            const flightCount = 2 + Math.floor(Math.random() * 2);
+            
+            for (let i = 0; i < flightCount; i++) {
+                const flightNumber = `ET-${day.slice(0, 2)}-${route.destination.slice(0, 3)}-${i + 1}`;
+                
+                // Check if flight already exists
+                if (!flights.find(f => f.flightNumber === flightNumber)) {
+                    const timeIndex = (i + days.indexOf(day)) % timeSlots.length;
+                    const departureTime = timeSlots[timeIndex];
+                    
+                    let price = route.basePrice;
+                    if (day === 'Friday' || day === 'Saturday' || day === 'Sunday') {
+                        price = Math.round(price * 1.2);
+                    }
+                    
+                    const newFlight = {
+                        flightNumber: flightNumber,
+                        source: route.source,
+                        destination: route.destination,
+                        departureTime: departureTime,
+                        seatsAvailable: 50 + Math.floor(Math.random() * 100),
+                        price: price,
+                        dayOfWeek: day
+                    };
+                    
+                    flights.push(newFlight);
+                    newFlightsCount++;
+                    
+                    console.log(`Added: ${flightNumber} - ${route.source} → ${route.destination} on ${day} at ${departureTime}`);
+                }
+            }
+        });
+    });
+    
+    localStorage.setItem('flights', JSON.stringify(flights));
+    console.log(`Generated ${newFlightsCount} new flights for testing`);
+    alert(`Generated ${newFlightsCount} new flights. Now try delaying a booking again.`);
+    
+    return newFlightsCount;
+}
+
+// Add this to make the function accessible from console
+window.generateTestFlights = generateMoreFlightsForTesting;
+
+// Helper function to calculate and display prices
+function calculateAndDisplayDelayPrices(booking, dayName) {
+    if (!assignedFlightForDelay) return;
+    
+    const dayMultipliers = {
+        'monday': 1.0,
+        'tuesday': 1.1,
+        'wednesday': 1.2,
+        'thursday': 1.15,
+        'friday': 1.25,
+        'saturday': 1.3,
+        'sunday': 1.35
+    };
+    
+    const multiplier = dayMultipliers[selectedDayForDelay] || 1.0;
+    const originalFlightPrice = assignedFlightForDelay.price;
+    const increasedPrice = Math.round(originalFlightPrice * multiplier);
+    delaySurchargeAmount = increasedPrice - originalFlightPrice;
+    const REBOOKING_FEE = 25;
+    const totalNewPrice = increasedPrice + REBOOKING_FEE;
+    
+    // Update UI
+    document.getElementById('assigned-flight-number').textContent = assignedFlightForDelay.flightNumber;
+    document.getElementById('assigned-departure-time').textContent = assignedFlightForDelay.departureTime;
+    document.getElementById('delay-flight-info').style.display = 'block';
+    
+    document.getElementById('new-price').textContent = `$${increasedPrice}`;
+    document.getElementById('delay-surcharge').textContent = `$${delaySurchargeAmount}`;
+    document.getElementById('rebooking-fee').textContent = `$${REBOOKING_FEE}`;
+    document.getElementById('price-difference').textContent = `$${totalNewPrice}`;
+    
+    // Color code
+    const diffElement = document.getElementById('price-difference');
+    const priceDifference = totalNewPrice - booking.price;
+    diffElement.style.color = priceDifference > 0 ? '#dc3545' : priceDifference < 0 ? '#28a745' : '#6c757d';
+    
+    showMessage('delay-message', 
+        `Flight found: ${assignedFlightForDelay.flightNumber} at ${assignedFlightForDelay.departureTime}`, 
+        'success'
+    );
+}
+// Add this helper function to log all flights by day
+function logAllFlightsByDay() {
+    console.log('=== FLIGHTS BY DAY ===');
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    
+    days.forEach(day => {
+        const dayFlights = flights.filter(f => f.dayOfWeek === day);
+        console.log(`${day}: ${dayFlights.length} flights`);
+        dayFlights.forEach(f => {
+            console.log(`  ${f.flightNumber}: ${f.source} → ${f.destination} (${f.seatsAvailable} seats, $${f.price})`);
+        });
+    });
+    
+    // Also log flights without dayOfWeek
+    const noDayFlights = flights.filter(f => !f.dayOfWeek);
+    if (noDayFlights.length > 0) {
+        console.log('Flights without dayOfWeek:', noDayFlights.length);
+        noDayFlights.forEach(f => {
+            console.log(`  ${f.flightNumber}: ${f.source} → ${f.destination}`);
+        });
+    }
+}
+// Process delay booking when confirm button is clicked
+
+function processDelayBooking() {
+console.log('bookingToDelay:', bookingToDelay);
+console.log('day-select element:', document.getElementById('day-select'));
+console.log('delay-reason element:', document.getElementById('delay-reason'));
+    
+    if (!bookingToDelay) {
+        showMessage('delay-message', 'No booking selected for delay!', 'error');
+        return;
+    }
+    
+    // Get the booking
+    const booking = bookings.find(b => b.id === bookingToDelay);
+    if (!booking) {
+        showMessage('delay-message', 'Error: Booking not found!', 'error');
+        return;
+    }
+    
+    // Get values directly from the form elements
+    const daySelect = document.getElementById('day-select');
+    const delayReasonSelect = document.getElementById('delay-reason');
+    
+    if (!daySelect) {
+        showMessage('delay-message', 'Error: Day selection element not found!', 'error');
+        return;
+    }
+    
+    const selectedDay = daySelect.value;
+    const delayReason = delayReasonSelect ? delayReasonSelect.value : '';
+    
+    console.log('Selected values:', { selectedDay, delayReason, bookingToDelay });
+    
+    // Validate that a day is selected
+    if (!selectedDay) {
+        showMessage('delay-message', 'Please select a day for your delayed flight!', 'error');
+        return;
+    }
+    
+    // Make sure we have an assigned flight (this should have been set by updateDelayPrice)
+    if (!assignedFlightForDelay) {
+        showMessage('delay-message', 'Please wait while we assign a flight for the selected day, or select a different day.', 'warning');
+        
+        // Try to assign a flight now
+        updateDelayPrice();
+        
+        // Check again
+        setTimeout(() => {
+            if (!assignedFlightForDelay) {
+                showMessage('delay-message', 'No flights available for the selected day. Please choose a different day.', 'error');
+            }
+        }, 500);
+        return;
+    }
+    
+    console.log('Processing delay for flight:', assignedFlightForDelay.flightNumber);
+    
+    // Process the delay with the values from the form
+    processDelayConfirmation(selectedDay, delayReason);
+}
+
+// Also update the processDelayConfirmation function to ensure it works correctly:
+
+function processDelayConfirmation(selectedDay, delayReason) {
+    console.log('Processing delay confirmation with:', { selectedDay, delayReason });
+    
+    const booking = bookings.find(b => b.id === bookingToDelay);
+    if (!booking) {
+        showMessage('delay-message', 'Error: Booking not found!', 'error');
+        return;
+    }
+    
+    if (!assignedFlightForDelay) {
+        showMessage('delay-message', 'Error: No flight assigned! Please select a different day.', 'error');
+        return;
+    }
+    
+    // Calculate prices based on selected day
+    const dayMultipliers = {
+        'monday': 1.0,
+        'tuesday': 1.1,
+        'wednesday': 1.2,
+        'thursday': 1.15,
+        'friday': 1.25,
+        'saturday': 1.3,
+        'sunday': 1.35
+    };
+    
+    const multiplier = dayMultipliers[selectedDay] || 1.0;
+    const originalFlightPrice = assignedFlightForDelay.price;
+    const increasedPrice = Math.round(originalFlightPrice * multiplier);
+    const REBOOKING_FEE = 25;
+    const totalNewPrice = increasedPrice + REBOOKING_FEE;
+    
+    console.log('Price calculation:', {
+        multiplier,
+        originalFlightPrice,
+        increasedPrice,
+        REBOOKING_FEE,
+        totalNewPrice
+    });
     
     // Free up old seat
     const oldFlight = flights.find(f => f.flightNumber === booking.flightNumber);
@@ -1724,39 +2138,110 @@ function confirmDelayBooking() {
         oldFlight.seatsAvailable++;
     }
     
-    // Update booking
-    const REBOOKING_FEE = 25;
-    const newSeat = null; // Passenger will need to select a new seat
-    
+    // Update booking with delay information
     booking.status = 'delayed';
     booking.originalFlightNumber = booking.flightNumber;
-    booking.flightNumber = newFlight.flightNumber;
-    booking.departureTime = newFlight.departureTime;
-    booking.price = newFlight.price;
-    booking.selectedSeat = newSeat;
-    booking.delayReason = delayReason;
+    booking.originalPrice = booking.price;
+    booking.flightNumber = assignedFlightForDelay.flightNumber;
+    booking.departureTime = assignedFlightForDelay.departureTime;
+    booking.price = totalNewPrice;
+    booking.selectedSeat = null; // Passenger needs to select new seat
+    booking.delayReason = delayReason || 'No reason provided';
+    booking.delayDay = selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1);
     booking.rebookingFee = REBOOKING_FEE;
+    booking.delaySurcharge = increasedPrice - originalFlightPrice;
     booking.delayDate = new Date().toISOString();
     
     // Decrease seats on new flight
-    newFlight.seatsAvailable--;
+    assignedFlightForDelay.seatsAvailable--;
     
     // Save to localStorage
     localStorage.setItem('bookings', JSON.stringify(bookings));
     localStorage.setItem('flights', JSON.stringify(flights));
     
-    showMessage('delay-message', 'Booking delayed successfully! You need to select a new seat for the new flight.', 'success');
+    // Show success message
+    const dayName = selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1);
+    showMessage('delay-message', 
+        `✅ Booking delayed to ${dayName} successfully!<br>
+        <strong>New Flight:</strong> ${assignedFlightForDelay.flightNumber}<br>
+        <strong>New Time:</strong> ${assignedFlightForDelay.departureTime}<br>
+        <strong>Total Price:</strong> $${totalNewPrice}<br>
+        <strong>Status:</strong> You need to select a new seat for your delayed flight.`, 
+        'success'
+    );
     
+    // Reset variables
+    selectedDayForDelay = null;
+    assignedFlightForDelay = null;
+    delaySurchargeAmount = 0;
+    bookingToDelay = null;
+    
+    // Close modal and refresh data after 3 seconds
     setTimeout(() => {
         closeDelayModal();
         loadMyBookings();
         loadAllBookings();
         loadFlights();
         loadStatistics();
-    }, 2000);
+        
+        // Show success notification
+        alert(`Booking delayed successfully to ${dayName}!\nNew Flight: ${assignedFlightForDelay ? assignedFlightForDelay.flightNumber : 'Unknown'}\nPlease select a new seat.`);
+    }, 3000);
 }
-
-// Add to window click event listener
+// Close delay modal
+function closeDelayModal() {
+    const delayModal = document.getElementById('delay-booking-modal');
+    if (delayModal) {
+        delayModal.style.display = 'none';
+    }
+    
+    // Reset all form elements
+    const daySelect = document.getElementById('day-select');
+    const delayReasonSelect = document.getElementById('delay-reason');
+    
+    if (daySelect) daySelect.value = '';
+    if (delayReasonSelect) delayReasonSelect.value = '';
+    
+    // Reset display elements
+    document.getElementById('original-price').textContent = '$0';
+    document.getElementById('new-price').textContent = '$0';
+    document.getElementById('delay-surcharge').textContent = '$0';
+    document.getElementById('price-difference').textContent = '$0';
+    document.getElementById('delay-flight-info').style.display = 'none';
+    
+    // Clear messages
+    const delayMessageEl = document.getElementById('delay-message');
+    if (delayMessageEl) delayMessageEl.innerHTML = '';
+    
+    // Reset variables
+    bookingToDelay = null;
+    selectedDayForDelay = null;
+    assignedFlightForDelay = null;
+    delaySurchargeAmount = 0;
+}
+// Validate delay form
+// Validate delay form
+// Validate delay form
+function validateDelayForm() {
+    const daySelect = document.getElementById('day-select');
+    const selectedDay = daySelect.value;
+    
+    if (!selectedDay) {
+        showMessage('delay-message', 'Please select a day for your delayed flight!', 'error');
+        return false;
+    }
+    
+    // Make sure we have an assigned flight
+    if (!assignedFlightForDelay) {
+        showMessage('delay-message', 'Please wait while we assign a flight for the selected day.', 'warning');
+        return false;
+    }
+    
+    // Update the global variable to be safe
+    selectedDayForDelay = selectedDay;
+    
+    return true;
+}
 // Update your existing click event listener to include new modals:
 window.addEventListener('click', function(event) {
     const cancelModal = document.getElementById('cancel-booking-modal');
@@ -2482,6 +2967,27 @@ document.addEventListener('DOMContentLoaded', function() {
         closeDeleteConfirmationModal();
     }
 });
-    
+ // Add this function at the end of script.js, just before the closing brackets
+
+// Reset and recreate flight data with all days of the week
+function resetFlightsData() {
+    if (confirm('This will reset all flight data. Are you sure?')) {
+        flights = [];
+        localStorage.removeItem('flights');
+        initializeData();
+        alert('Flight data has been reset with flights for all days of the week!');
+        
+        // Refresh flight displays if we're on relevant screens
+        if (document.getElementById('flights-list')) {
+            loadFlights();
+        }
+        if (document.getElementById('manage-flights-list')) {
+            loadFlightsForManagement();
+        }
+        
+        // Also update existing users display
+        loadExistingUsers();
+    }
+}
     // ... rest of existing code ...
 });

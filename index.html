@@ -657,52 +657,101 @@
         <div class="payment-modal-header">
             <h3 data-i18n="delay_booking_title">Delay Your Booking</h3>
         </div>
-        <div class="payment-modal-form">
-            <div class="form-group">
-                <label data-i18n="select_new_flight">Select New Flight:</label>
-                <select id="new-flight-select" onchange="updateDelayPrice()">
-                    <option value="" data-i18n="choose_flight">Choose a flight</option>
-                    <!-- Options will be added by JavaScript -->
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label data-i18n="delay_reason">Reason for Delay (Optional):</label>
-                <select id="delay-reason">
-                    <option value="" data-i18n="choose_reason">Choose a reason</option>
-                    <option value="personal" data-i18n="reason_personal">Personal reasons</option>
-                    <option value="emergency" data-i18n="reason_emergency">Emergency</option>
-                    <option value="schedule" data-i18n="reason_schedule">Schedule conflict</option>
-                    <option value="other" data-i18n="reason_other">Other</option>
-                </select>
-            </div>
-            
-            <div class="price-comparison">
-                <div class="price-item">
-                    <span data-i18n="original_price">Original Price:</span>
-                    <span id="original-price">$0</span>
-                </div>
-                <div class="price-item">
-                    <span data-i18n="new_price">New Price:</span>
-                    <span id="new-price">$0</span>
-                </div>
-                <div class="price-item total">
-                    <span data-i18n="price_difference">Price Difference:</span>
-                    <span id="price-difference">$0</span>
-                </div>
-            </div>
-            
-            <div class="delay-fee-note">
-                <p data-i18n="delay_fee_note">Note: A $25 rebooking fee applies for flight changes.</p>
-            </div>
-            
-            <div class="payment-modal-actions">
-                <button class="btn btn-success" onclick="confirmDelayBooking()" data-i18n="confirm_delay">Confirm Delay</button>
-                <button class="btn btn-back" onclick="closeDelayModal()" data-i18n="cancel_delay">Cancel</button>
-            </div>
-        </div>
-        <div id="delay-message" class="message"></div>
+<div class="payment-modal-form">
+    <div class="form-group">
+        <label data-i18n="select_day">Select Day:</label>
+        <select id="day-select" onchange="updateDelayPrice()">
+            <option value="" data-i18n="choose_day">Choose a day</option>
+            <option value="monday">Monday</option>
+            <option value="tuesday">Tuesday</option>
+            <option value="wednesday">Wednesday</option>
+            <option value="thursday">Thursday</option>
+            <option value="friday">Friday</option>
+            <option value="saturday">Saturday</option>
+            <option value="sunday">Sunday</option>
+        </select>
     </div>
+<div class="day-surcharge-grid">
+    <div class="day-surcharge-item">
+        <span class="day">Monday</span>
+        <span class="surcharge low">No surcharge</span>
+    </div>
+    <div class="day-surcharge-item">
+        <span class="day">Tuesday</span>
+        <span class="surcharge">+10%</span>
+    </div>
+    <div class="day-surcharge-item">
+        <span class="day">Wednesday</span>
+        <span class="surcharge">+20%</span>
+    </div>
+    <div class="day-surcharge-item">
+        <span class="day">Thursday</span>
+        <span class="surcharge">+15%</span>
+    </div>
+    <div class="day-surcharge-item">
+        <span class="day">Friday</span>
+        <span class="surcharge high">+25%</span>
+    </div>
+    <div class="day-surcharge-item">
+        <span class="day">Saturday</span>
+        <span class="surcharge high">+30%</span>
+    </div>
+    <div class="day-surcharge-item">
+        <span class="day">Sunday</span>
+        <span class="surcharge high">+35%</span>
+    </div>
+</div>
+    <div class="form-group">
+        <label data-i18n="delay_reason">Reason for Delay (Optional):</label>
+        <select id="delay-reason">
+            <option value="" data-i18n="choose_reason">Choose a reason</option>
+            <option value="personal" data-i18n="reason_personal">Personal reasons</option>
+            <option value="emergency" data-i18n="reason_emergency">Emergency</option>
+            <option value="schedule" data-i18n="reason_schedule">Schedule conflict</option>
+            <option value="other" data-i18n="reason_other">Other</option>
+        </select>
+    </div>
+    
+    <div class="delay-flight-info" id="delay-flight-info" style="display: none;">
+        <div class="message info">
+            <strong>Assigned Flight:</strong> <span id="assigned-flight-number">ET701</span><br>
+            <strong>Departure Time:</strong> <span id="assigned-departure-time">08:00</span>
+        </div>
+    </div>
+    
+    <div class="price-comparison">
+        <div class="price-item">
+            <span data-i18n="original_price">Original Price:</span>
+            <span id="original-price">$0</span>
+        </div>
+        <div class="price-item">
+            <span data-i18n="new_price">New Price:</span>
+            <span id="new-price">$0</span>
+        </div>
+        <div class="price-item">
+            <span>Delay Surcharge:</span>
+            <span id="delay-surcharge">$0</span>
+        </div>
+        <div class="price-item">
+            <span>Rebooking Fee:</span>
+            <span id="rebooking-fee">$25</span>
+        </div>
+        <div class="price-item total">
+            <span data-i18n="price_difference">Total Price:</span>
+            <span id="price-difference">$0</span>
+        </div>
+    </div>
+    
+    <div class="delay-fee-note">
+        <p data-i18n="delay_fee_note">Note: A $25 rebooking fee applies for all flight changes.</p>
+    </div>
+    
+<div class="payment-modal-actions">
+    <button class="btn btn-success" onclick="processDelayBooking()" data-i18n="confirm_delay">Confirm Delay</button>
+    <button class="btn btn-back" onclick="closeDelayModal()" data-i18n="cancel_delay">Cancel</button>
+</div>
+<div id="delay-message" class="message"></div>
+    
 </div>
     <!-- Airline Footer -->
     <div class="airline-footer">

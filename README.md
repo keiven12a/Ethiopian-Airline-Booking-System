@@ -8,7 +8,7 @@ Ethiopian Airlines Booking System
 A modern, web-based flight booking system designed for Ethiopian Airlines, 
 featuring bilingual support and comprehensive management tools for both passengers and administrators.
 
- Features
+    Features
      Core Functionality
               1. About Airline Booking system
               2. Passenger Registration & Login
@@ -205,4 +205,5 @@ Quick Start
 
 
 Note: This is a client-side application. For production use, consider implementing server-side validation and a proper database system.
+
 

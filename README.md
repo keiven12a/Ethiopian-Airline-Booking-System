@@ -8,38 +8,33 @@ Ethiopian Airlines Booking System
 A modern, web-based flight booking system designed for Ethiopian Airlines, 
 featuring bilingual support and comprehensive management tools for both passengers and administrators.
 
-    Features
-     Core Functionality
-              1. About Airline Booking system
-              2. Passenger Registration & Login
-              3. Admin Authentication (Pre-configured admin account)
-              4. Flight Booking System
-              5. Flight Management (Admin only)
-              6. Real-time Booking System
-              7. Payment Processing
-              8. Multi-language Support (English & Amharic)
-
+    Features/web pages
+     Core Functionality/web pages
+                  1. Main Menu (home screen)
+                  2. About System Modal (modal with extensive content)
+                  3. Passenger Registration
+                  4. Passenger Login
+                  5. Admin Login
+                  6. Passenger Dashboard (with 3 sub-sections)
+                  7. Admin Dashboard (with 4 sub-sections)
+                 
 
      User Roles
-      Passenger Features
-               -  User registration with passport details
-              -  Browse available flights
-              -  Search flights by route
-              -  Book flights with payment simulation
-              -  View personal booking history
-              -  Quick login for existing users
+      Passenger Features/sub web page
+              1. Search flights by route
+              2. Book flights with payment simulation
+              3. View personal booking history
+             
 
 
-     Admin Features
-            -  Add new flights
-           -  Manage existing flights
-           -  Update seat availability
-           -  View all bookings
-           -  System statistics and analytics
-           -  Reset system functionality
+     Admin Features/sub web pages
+            1. Add new flights
+            2. Manage flights
+            3. View all bookings
+            4. System statistics and analytics
  
 
-Quick Start
+     Quick Start
            Default Admin Credentials
                -Username: RESPECT_WORLD
               -Password: keiven12
@@ -205,5 +200,6 @@ Quick Start
 
 
 Note: This is a client-side application. For production use, consider implementing server-side validation and a proper database system.
+
 
 

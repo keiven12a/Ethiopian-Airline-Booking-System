@@ -109,7 +109,6 @@ const translations = {
 'choose_gender': 'Choose your gender',
 'gender_male': 'Male',
 'gender_female': 'Female',
-'gender_other': 'Other',
 'age_policies_title': 'Age-Based Policies:',
 'age_policy1': '• Under 2: Infants (may travel free/lap infant)',
 'age_policy2': '• 2-4: Children (usually need paid seat)',
@@ -159,7 +158,9 @@ const translations = {
     'rebooking_fee': 'Rebooking Fee',
     'booking_status_breakdown': 'Booking Status Breakdown',
     'recent_status_changes': 'Recent Status Changes',
-    'no_recent_changes': 'No recent status changes.'
+    'no_recent_changes': 'No recent status changes.',
+    'about_us': 'About Us',
+'about_us_title': 'Project Team Members',
     },
     'am': {
         'system_title': 'የአየር መንገድ ቦታ ማሰሺያ ስርዓት',
@@ -267,7 +268,6 @@ const translations = {
 'choose_gender': 'ጾታዎን ይምረጡ',
 'gender_male': 'ወንድ',
 'gender_female': 'ሴት',
-'gender_other': 'ሌላ',
 'age_policies_title': 'በዕድሜ ላይ የተመሰረቱ ፖሊሲዎች:',
 'age_policy1': '• ከ2 ዓመት በታች: ሕፃናት (በነጻ/በእጅ ሊጓዙ ይችላሉ)',
 'age_policy2': '• 2-4: ልጆች (በመደበኛነት የሚከፈል መቀመጫ ያስፈልጋቸዋል)',
@@ -317,7 +317,9 @@ const translations = {
     'rebooking_fee': 'የቦታ መልሶ ማስያዣ ክፍያ',
     'booking_status_breakdown': 'የቅጠሜ ሁኔታ መበስበስ',
     'recent_status_changes': 'የቅርብ ጊዜ ሁኔታ ለውጦች',
-    'no_recent_changes': 'ምንም የቅርብ ጊዜ ሁኔታ ለውጦች የሉም.'
+    'no_recent_changes': 'ምንም የቅርብ ጊዜ ሁኔታ ለውጦች የሉም.',
+    'about_us': 'ስለ እኛ',
+'about_us_title': 'የፕሮጀክት ቡድን አባላት',
     }
 };
 
@@ -375,6 +377,58 @@ function updateLanguageButtons() {
     });
 }
 
+// ============ ABOUT US MODAL FUNCTIONS ============
+
+/// ============ ABOUT US MODAL FUNCTIONS ============
+
+// Show About Us modal - UPDATED FIXED VERSION
+function showAboutUs() {
+    console.log('About Us button clicked');
+    
+    // Get the modal from HTML
+    const aboutUsModal = document.getElementById('about-us-modal');
+    
+    if (aboutUsModal) {
+        // FIRST: Make sure modal exists in the DOM and is visible
+        if (aboutUsModal.style.display === 'none' || aboutUsModal.style.display === '') {
+            aboutUsModal.style.display = 'block';
+        }
+        
+        // Update language for modal content
+        updateLanguage();
+        
+        // Force the modal to be on top
+        aboutUsModal.style.zIndex = '1001';
+        
+        console.log('About Us modal should be visible');
+    } else {
+        console.error('About Us modal element not found!');
+        // Emergency fallback
+        alert('About Us - Team Members\n\n' +
+              '1. Kibrealem Gebretnsae\n2. Kokob Hailey\n3. Tesfay Nguse\n' +
+              '4. Awet Teklay\n5. Yeabsra Shimels\n6. Rebyu Dejene\n' +
+              '7. Adiyam Weldu\n8. Biruk Hiluf');
+    }
+}
+
+// Close About Us modal - UPDATED FIXED VERSION
+function closeAboutUsModal() {
+    const aboutUsModal = document.getElementById('about-us-modal');
+    if (aboutUsModal) {
+        aboutUsModal.style.display = 'none';
+        console.log('About Us modal closed');
+    }
+}
+
+// Also add this function to make sure modals don't conflict
+function hideAllOtherModals() {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (modal.id !== 'about-us-modal') {
+            modal.style.display = 'none';
+        }
+    });
+}
 document.addEventListener('DOMContentLoaded', function() {
     updateLanguage();
     updateLanguageButtons();
@@ -386,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const seatSelectModal = document.getElementById('seat-modal');
     const aboutModal = document.getElementById('about-system-modal');
     const paymentMethodModal = document.getElementById('payment-method-modal');
-    
+    const aboutUsModal = document.getElementById('about-us-modal');
     if (event.target === paymentModal) {
         closeModal();
     }
@@ -401,6 +455,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (event.target === paymentMethodModal) {
         closePaymentMethodModal();
+    }
+    if (event.target === aboutUsModal) {
+        closeAboutUsModal();
     }
 });
 

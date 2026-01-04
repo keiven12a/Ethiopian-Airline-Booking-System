@@ -11,12 +11,13 @@ featuring bilingual support and comprehensive management tools for both passenge
     Features/web pages
      Core Functionality/web pages
                   1. Main Menu (home screen)
-                  2. About System Modal (modal with extensive content)
-                  3. Passenger Registration
-                  4. Passenger Login
-                  5. Admin Login
-                  6. Passenger Dashboard (with 3 sub-sections)
-                  7. Admin Dashboard (with 4 sub-sections)
+                  2. About us modal(modal with extensive context)
+                  3. About System Modal (modal with extensive content)
+                  4. Passenger Registration
+                  5. Passenger Login
+                  6. Admin Login
+                  7. Passenger Dashboard (with 3 sub-sections)
+                  8. Admin Dashboard (with 4 sub-sections)
                  
 
      User Roles
@@ -200,6 +201,7 @@ featuring bilingual support and comprehensive management tools for both passenge
 
 
 Note: This is a client-side application. For production use, consider implementing server-side validation and a proper database system.
+
 
 
 

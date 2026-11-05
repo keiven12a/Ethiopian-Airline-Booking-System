@@ -1,207 +1,32 @@
- 
+# Ethiopian Airlines Booking System
 
-Ethiopian Airlines Booking System
+A browser-based flight booking demo for Ethiopian Airlines. Passengers can search and book flights, while administrators can manage flights and review bookings.
 
+## Features
 
-  Project Overview
+- Passenger registration, login, flight search, booking, and booking history
+- Administrative flight and booking management with basic statistics
+- English and Amharic language support
+- Responsive interface for desktop, tablet, and mobile
+- Simulated payment flow
 
-A modern, web-based flight booking system designed for Ethiopian Airlines, 
-featuring bilingual support and comprehensive management tools for both passengers and administrators.
+## Getting Started
 
-    Features/web pages
-     Core Functionality/web pages
-                  1. Main Menu (home screen)
-                  2. About us modal(modal with extensive context)
-                  3. About System Modal (modal with extensive content)
-                  4. Passenger Registration
-                  5. Passenger Login
-                  6. Admin Login
-                  7. Passenger Dashboard (with 3 sub-sections)
-                  8. Admin Dashboard (with 4 sub-sections)
-                 
+1. Download or clone the project.
+2. Open `index.html` in a modern web browser.
 
-     User Roles
-      Passenger Features/sub web page
-              1. Search flights by route
-              2. Book flights with payment simulation
-              3. View personal booking history
-             
+No installation or server is required.
 
+## Project Files
 
-     Admin Features/sub web pages
-            1. Add new flights
-            2. Manage flights
-            3. View all bookings
-            4. System statistics and analytics
- 
+- `index.html` — Application structure
+- `style.css` — Layout and styling
+- `script.js` — Application behavior
 
-     Quick Start
-           Default Admin Credentials
-               -Username: RESPECT_WORLD
-              -Password: keiven12
+## Notes
 
-         Pre-loaded Ethiopian Flight Routes
-             -The system comes with 10 pre-configured domestic Ethiopian flight routes:
-             1. Addis Ababa → Bahir Dar (ET701)
-             2. Addis Ababa → Mekele (ET702)
-             3. Addis Ababa → Gondar (ET703)
-             4. Addis Ababa → Hawassa (ET704)
-             5. Addis Ababa → Arba Minch (ET705)
-             6. Addis Ababa → Dire Dawa (ET706)
-             7. Addis Ababa → Axum (ET707)
-             8. Addis Ababa → Lalibela (ET708)
-             9. Addis Ababa → Gambella (ET709)
-             10. Addis Ababa → Jimma (ET710)
+This is a client-side demonstration. Data is stored in the browser's LocalStorage, so it is limited to that browser and device. Payments are simulated; the application is not intended for production use. A production system would require a secure backend, server-side validation, and a database.
 
+## License
 
-            Technical Details
-                    File Structure
-                    airline-booking-system/
-                                                        │
-                                                        ├── index.html          # Main application file
-                                                        ├── style.css           # Styling and responsive design
-                                                        ├── script.js           # Application logic and functionality
-                                                        └── README.md           # This documentation file
-
-
-            Technologies Used
-                            - Frontend: HTML5, CSS3, JavaScript (ES6+)
-                            - Storage: LocalStorage (Client-side data persistence)
-                        - Styling: CSS Grid, Flexbox, Gradient backgrounds
-                        - Fonts: Google Fonts (Noto Sans Ethiopic for Amharic support)
-                        - Icons: Unicode emojis and symbols
-
-
-            Browser Compatibility
-                                    -  Chrome 
-                                    -  Firefox 
-                                    -  Safari 
-                                    -  Edge 
-
-            
-            Responsive Design
-                The application is fully responsive and works on:
-                                    -  Desktop computers
-                                    -  Mobile phones
-                                    -  Tablets
-                                    -  Large screens
-
-
-            Language Support
-                    Available Languages
-                            - English (Default)
-                            - Amharic (አማርኛ)
-                    Language Features
-                            - Dynamic text switching
-                            - Amharic font support (Noto Sans Ethiopic)
-                            - Right-to-left text compatibility
-                            - Bilingual form placeholders
-
-            
-            Installation & SetupLocal Development
-                        1. Download all project files
-                        2. Open `index.html` in a web browser
-                        3. No server setup required - runs completely client-side
-
-            Data Persistence
-                    - All data is stored in browser's LocalStorage
-                    - Data persists between browser sessions
-                    - System reset option available in admin panel
-
-
-            Design Features
-                        Visual Elements
-                            - Modern gradient backgrounds
-                            - Card-based layouts
-                            - Smooth animations and transitions
-                            - Ethiopian flag color themes
-                            - Professional color scheme
-                    User Experience
-                            - Intuitive navigation
-                            - Clear error/success messages
-                            - Modal dialogs for payments and management
-                            - Quick login options
-                            - Form validation
-                    Security Features
-                            - Client-side validation
-                            - Password protection
-                            - Session management
-                            - Input sanitization
-                            - Secure data storage in LocalStorage
-
-            Admin Dashboard Features
-                        Flight Management
-                                - Add new flights with complete details
-                                - Update seat availability in real-time
-                                - View all flight information
-                    Analytics & Reporting
-                            - Total flights count
-                            - Total bookings statistics
-                            - Revenue calculations
-                            - Passenger registration metrics
-                            - Available seats overview
-
-
-            Usage Instructions
-                    For Passengers
-                            1. Register: Create a new passenger account
-                            2. Login: Access your dashboard
-                            3. Browse Flights: View available flights
-                            4. Search: Find specific routes
-                            5. Book: Select and pay for flights
-                            6. Manage: View booking history
-                For Administrators
-                        1. Login: Use admin credentials
-                        2. Add Flights: Create new flight routes
-                        3. Manage: Update seat availability
-                        4. Monitor: View all system bookings
-                        5. Analyze: Check system statistics
-            
-
-            System Reset
-                    Administrators can reset the entire system using the "Reset System" button, which will:
-                            - Clear all passenger data
-                            - Remove all bookings
-                            - Reset flight data to default Ethiopian routes
-                        - Maintain admin credentials
-
-            
-            Troubleshooting
-                    Common Issues
-                            1. Data not saving: Check if LocalStorage is enabled in browser
-                            2. Login issues: Verify correct credentials
-                            3. Display problems: Ensure browser supports modern CSS features
-                            4. Language not switching: Refresh page after language change
-
-            Browser Requirements
-                        - JavaScript must be enabled
-                        - LocalStorage support required
-                        - Modern CSS support recommended
-
-            Future Enhancements
-                    Potential features for future versions:
-                        - Email notifications
-                        - Advanced payment integration
-                        - Flight cancellation features
-                        - Seat selection system
-                        - Flight status updates
-                    - Mobile app version
-                    - Backend database integration
-
-
-            Contributing
-                    This is a standalone project. For modifications:
-                        1. Fork the project
-                        2. Make your changes
-                        3. Test thoroughly
-                        4. Submit improvements
-
-            License
-                This project is for educational and demonstration purposes.
-
-
-Note: This is a client-side application. For production use, consider implementing server-side validation and a proper database system.
-
-
-
-
+This project is provided for educational and demonstration purposes.
